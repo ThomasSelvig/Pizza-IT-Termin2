@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Thomas' Pizza</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+		<!-- req jquerymodal.com -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+		<link rel="stylesheet" href="./assets/styles.css">
+	</head>
+	<body>
+		<noscript><h1 style="color: red;">Du må kjøre denne siden med javascript skrudd på!</h1></noscript>
+		<noscript><h1 style="color: red;">Husk også å tillate audio-autoplay!</h1></noscript>
+
+		<audio src="" id="audioplayer"></audio>
+
+		<!-- Forside -->
+		<div class="bg"></div>
+		<div class="caption">
+			<span class="bg-border">
+				<img 
+					src="./assets/pizza.svg"
+					alt="-pizza svg-"
+					class="img-fluid"
+					width="200"
+					height="200"
+					id="logo">
+				Thomas' Pizzeria!
+			</span>
+		</div>
+
+		<!-- main innhold -->
+		<div class="container" id="meny">
+			<h1 class="my-5">Saldo: <span id="saldo"></span>kr</h1>
+
+			<!-- pizzameny-seksjonen -->
+			<h2 class="mb-3 mt-4">Meny</h2>
+
+			<div class="row my-4" id="pizza_cards"></div>
+		
+			<h2 class="mb-3 mt-4">Favoritter</h2>
+			<table class="table mb-5">
+				<thead>
+					<tr>
+						<th scope="col">Pizza</th>
+						<th scope="col">Pris</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody id="fav_pizza_table_body">
+
+				</tbody>
+			</table>
+
+			<!-- Kart seksjonen -->
+			<div class="row" style="margin-top: 8rem;">
+				<div class="col-md-7">
+					<h1 style="margin-top: 6rem">Vår tilhørighet</h1>
+					<h3 class="text-muted">
+						Beveg musen over kartet for å zoome inn på hvor vi holder til!
+					</h3>
+				</div>
+
+				<div class="col-md-5">
+					<div id="bilderamme"><img src="./assets/map.png" alt="kart png" id="bilde"></div>
+				</div>
+			</div>
+
+			<!-- video seksjonen -->
+			<hr style="margin: 5rem 0;" />
+			<div class="row">
+				<div class="col-md-5">
+					
+					<!-- video -->
+					<div class="embed-responsive embed-responsive-16by9" align="center">
+						<video class="embed-responsive-item" id="vid">
+							<source src="./assets/pizza.mp4" type="video/mp4" />
+						</video>
+					</div>
+
+				</div>
+
+				<div class="col-md-7">
+					<h1>Om Thomas' Pizzeria!</h1>
+					<h3 class="text-muted">
+						En kort video om hvordan våre pizzaer blir laget
+					</h3>
+					<h4 class="text-muted">(Selskapet vårt het "Dominos" før)</h4>
+
+					<div class="row mt-5 mb-1">
+						<btn class="mx-2 col-sm btn btn-primary" id="btn_play" type="button">Spill av</btn>
+						<btn class="mx-2 col-sm btn btn-danger" id="btn_pause" type="button">Pause</btn>
+					</div>
+					<div class="row mb-4">
+						<btn class="mx-2 col-sm btn btn-secondary" id="btn_double" type="button">Dobbel hastighet</btn>
+						<btn class="mx-2 col-sm btn btn-secondary" id="btn_normal" type="button">Normal hastighet</btn>
+						<btn class="mx-2 col-sm btn btn-secondary" id="btn_skip" type="button">Spol til viktig del</btn>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- kunde-database seksjon -->
+			<hr style="margin: 5rem 0;" />
+			<div class="row">
+				<div class="col-sm-7">
+					<h1 style="margin-top: 2rem">Organisert backend</h1>
+					<h3 class="text-muted">
+						Vårt pizzaselskap tar godt vare på din persondata <br>
+						Eksempel kundeliste:
+					</h3>
+				</div>
+				<div class="col-sm-5">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Navn</th>
+								<th scope="col">Addresse</th>
+							</tr>
+						</thead>
+						<tbody id="kundeliste">
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- graf seksjonen -->
+			<hr style="margin: 5rem 0;" />
+			<h1 style="text-align: center;">Fjordårets fortjeneste</h1>
+			<div id="graf"></div>
+
+			<!-- usynlig ordre meny -->
+			<div id="order_m" class="modal">
+				<p id="order_m_content"></p>
+			</div>
+
+		</div>
+
+
+		<!-- Footer med kontaktinfo -->
+		<div class="bg-dark text-white">
+			<footer class="mt-3 py-5 container">
+				<h1 class="mb-4">Thomas' Pizzeria</h1>
+				<div class="row">
+					<div class="col-2">
+						<p>Epost</p>
+						<p>Mobil</p>
+						<p>Addresse</p>
+					</div>
+					<div class="col-2">
+						<p><a href="mailto:kontakt@thomaspizzeria.no">
+							kontakt@thomaspizzeria.no</a></p>
+						<p>+47 123 23 321</p>
+						<p>Eikenøtten 5</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+		<!--
+		gjemte/usynlige elementer for referanse i JS ...
+		for templates som ikke vises før bruker gjør en handling 
+			-->
+		<div hidden>
+
+			<!-- template for invis menu (den som dukker opp ved kjøp) -->
+			<div id="order_m_template">
+				<h3 class="mb-3">Kjøp TITLE</h3>
+				<form action="/" method="POST">
+					<div class="form-group">
+						<label>Restaurant</label>
+						<select class="form-control" id="inp_restaurant_template">
+							<option>Thomas' Pizzeria Røa</option>
+							<option>Thomas' Pizzeria Oslo S</option>
+							<option>Thomas' Pizzeria Bekkestua</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Pickup / Delivery date and time</label>
+						<div class="input-group date" id="inp_datetime_template">
+							<input type="text" class="form-control" value="7:00 PM"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Antall Pizzaer</label>
+						<input type="number" id="inp_amount_template" class="form-control" value=1 min=1 max=10>
+					</div>
+					<div class="form-group">
+						<label>Pizza Meny størrelse</label>
+						<select id="inp_menu_size_template" class="form-control">
+							<option>Liten</option>
+							<option>Ekstra stor</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Hente eller få levert på døren?</label>
+						<div class="form-check">
+							<input name="leveranse_status" type="radio" id="inp_hente_selv_bool_template" class="form-check-input" value="Hentes" checked>
+							<label for="inp_hente_selv_bool" class="form-check-label">Hente selv</label>
+						</div>
+						<div class="form-check">
+							<input name="leveranse_status" type="radio" id="inp_leveranse_bool_template" class="form-check-input" value="Leveres">
+							<label for="inp_leveranse_bool" class="form-check-label">Leveranse</label>
+						</div>
+					</div>
+					<a href="javascript:add_order('TITLE', PRICE);" class="btn btn-primary" id="btn_add_order_template">Legg inn bestilling</a>
+					<!-- rel="modal:close" -->
+				</form>
+			</div>
+
+			<!-- template for "pizza card" (for menyen) -->
+			<div id="pizza_card_template">
+				<div class="card col-sm mx-4" style="border: none;">
+					<img src="IMAGE" alt="pizza bilde" class="card-img-top">
+					<div class="card-body">
+						<h5 class="card-title">TITLE</h5>
+						<p class="card-text">TEXT</p>
+
+						<a
+							href="javascript:pizza_action('TITLE', 'buy')"
+							style="display: block;"
+							class="btn btn-primary mb-2">
+						Kjøp</a>
+
+						<a
+							href="javascript:pizza_action('TITLE', 'favourite')"
+							style="display: block;"
+							class="btn btn-info">
+						Favoritt</a>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- main script, plassert på bunnen slik at javascripten skal ha
+				elementer å referere til (la HTML loade først) -->
+		<script src="./assets/script.js"></script>
+	</body>
+</html>

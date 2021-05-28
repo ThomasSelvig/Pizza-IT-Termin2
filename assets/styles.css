@@ -1,0 +1,80 @@
+
+/* For forsiden */
+
+body, html {
+	height: 100%;
+}
+
+.bg {
+	background-image: url("https://image.freepik.com/free-photo/tasty-pepperoni-pizza-black-concrete-background_79782-103.jpg");
+	height: 100%;
+	opacity: .7;
+
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.caption {
+	position: absolute;
+	left: 0;
+	top: 40%;
+	width: 100%;
+	text-align: center;
+	color: #000;
+}
+.bg-border {
+	background-color: #111;
+	color: #fff;
+	padding: 18px;
+	font-size: 25px;
+	letter-spacing: 10px;
+}
+@keyframes logoanim {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(30deg);
+	}
+}
+#logo {
+	width: 15vh;
+	height: 15vh;
+
+	animation-name: logoanim;
+	animation-duration: 2.5s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction:alternate;
+	/* animation: logoanim 2s ease 0 infinite none alternate-reverse; */
+}
+
+/* interaktivt bilde */
+#bilderamme {
+	overflow: hidden;
+	border: 1px solid grey;
+	margin: 0 auto;
+	max-width: 45vh;
+	height: 45vh;
+}
+#bilde {
+	width: 45vh;
+	height: 45vh;
+}
+
+/* graf */
+#graf {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+
+	width: 50vw;
+	height: 25vh;
+	margin: 5rem auto; 
+}
+
+#graf > div {
+	background-color: darkslategray;
+	margin: 5px;
+	flex-grow: 1;
+}
